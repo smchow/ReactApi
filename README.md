@@ -30,6 +30,8 @@ Student Sign Up - http://g.recordit.co/tIyDv2oADm.gif
 
 Student Login & View - http://g.recordit.co/7KRC1zS41o.gif
 
+Educator View & Update Projects - http://g.recordit.co/xsa2GOhQra.gif
+
 ## Contributers
 * [Anna Kimtis](https://github.com/akimtis)
 * [Kathleen Catlett](https://github.com/kathcatBC)
