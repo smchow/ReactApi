@@ -12,14 +12,10 @@ module.exports = function(app) {
 
 
   // Using the passport.authenticate middleware with our local strategy.
-  // If the user has valid login credentials, send them to the members page.
+  // If the user has valid login credentials, send them to the landing page.
   // Otherwise the user will be sent an error
  app.post("/api/login/teacher", passport.authenticate("local"), function(req, res) {
-    // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
-    // So we're sending the user back the route to the members page because the redirect will happen on the front end
-    // They won't get this or even be able to access this page if they aren't authed
     res.json(req.user);
-      // req.user let's us know that the usesr is logged.
   });
 
 
@@ -75,10 +71,6 @@ app.get('/view/studentid', function(req,res){
 
     });
 });
-
-  // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
-  // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
-  // otherwise send back an error
   
 
   // app.get("/api/teachers", function(req, res) {
@@ -147,9 +139,7 @@ app.get('/view/studentid', function(req,res){
             
     }).catch(function(err) {
       // catch errors and send them back to the calling function
-      // emails must be unique
-      // some fields are also required
-      // these are the most common errors
+
       console.log("app post - " + err);
      if (err != undefined) {
            res.status(500).json(err)
@@ -158,9 +148,6 @@ app.get('/view/studentid', function(req,res){
 
     
   });
-
-
-
 
 
   // Route for logging user out
@@ -200,8 +187,6 @@ app.get("/api/fieldnotes", function(req, res) {
       res.json({});
     }
     else {
-      // Otherwise send back the user's email and id
-      // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
         id: req.user.id,

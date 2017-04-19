@@ -1,5 +1,4 @@
-// Requiring bcrypt for password hashing. Using the bcrypt-nodejs version as the regular bcrypt module
-// sometimes causes errors on Windows machines
+// Requiring bcrypt for password hashing. 
 var bcrypt = require("bcrypt-nodejs");
 // Creating our User model
 module.exports = function(sequelize, DataTypes) {
@@ -32,8 +31,8 @@ module.exports = function(sequelize, DataTypes) {
         return bcrypt.compareSync(password, this.password);
       }
     },
-    // Hooks are automatic methods that run during various phases of the User Model lifecycle
-    // In this case, before a User is created, we will automatically hash their password
+    
+    // Before a User is created, we will automatically hash their password
     hooks: {
       beforeCreate: function(user, options, cb) {
         // user was passed to function so use user
