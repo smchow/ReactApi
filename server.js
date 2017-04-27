@@ -2,6 +2,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var session = require("express-session");
+var moment = require('moment');
 //var multer = require('multer');
 // Requiring passport as we've configured it
 
@@ -139,6 +140,39 @@ app.get('/view/:studentid', function(req,res){
 
     });
 });
+
+
+app.get('/viewnotes/:projectid',  function(req, res) {
+   var sid = -1;
+  /*if (req.user.role == "Student") {
+      sid = req.user.id;
+     }*/
+   db.Project.findAll({
+        where: {
+        id: req.params.projectid
+      }
+     
+    }).then(function(dbProject) {
+    db.Fieldnote.findAll({
+        where: {
+        ProjectId: req.params.projectid
+      },
+        include: [db.Student]
+    }).then(function(dbFieldnotes) {
+      var newFieldNotes = []
+        for (i in dbFieldnotes){
+           var showDelete = false;
+           if (dbFieldnotes[i].StudentId == sid)  showDelete = true;
+           dbFieldnotes[i].newnotedate = moment(dbFieldnotes[i].notedate).format( "MM-DD-YYYY");
+           dbFieldnotes[i].showDeleteBtn = showDelete;
+            newFieldNotes.push(dbFieldnotes[i].dataValues)
+        }
+      //dbFieldnotes[i].newnotedate = moment(dbFieldnotes[i].notedate).format( "MM-DD-YYYY");
+        res.json(dbFieldnotes);
+    //res.render("notes/notes_view", {data: dbFieldnotes, Project: dbProject })
+       });
+});
+   });
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(function() {
