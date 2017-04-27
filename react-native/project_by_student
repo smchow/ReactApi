@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ListView } from 'react-native';
+import { Text, View, StyleSheet, ListView , TextInput } from 'react-native';
 import { Constants } from 'expo';
 
 export default class App extends Component {
@@ -8,6 +8,7 @@ export default class App extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       projects: ds.cloneWithRows([]),
+      studentId: "2"
     };
   }
   
@@ -28,8 +29,16 @@ export default class App extends Component {
       <View style={styles.container}>
        <Text style={styles.h2}> Locus</Text>
         <Text style={styles.paragraph}>
-          Projects list for student id: 1
+          Projects list for student id: {this.state.studentId}
         </Text>
+
+        
+        <Text style={styles.heading}>Enter Student ID</Text>
+        <TextInput
+          style={{ width: 200, height: 44, padding: 8 , border: 2 , borderStyle :'solid'}}
+          defaultValue="studentId"
+          onChangeText={(text) => this.setState({studentId: text})}
+        />
 
       <ListView
         dataSource={this.state.projects}
