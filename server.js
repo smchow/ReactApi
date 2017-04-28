@@ -52,13 +52,12 @@ app.use("/educator", educatorRoutes);
 //if () PORT = process.env.
 
 app.get('/notes/addImg', function(req,res){
-  var AWS = require('aws-sdk');
-
-//var s3 = new AWS.S3();
-let s3 = new aws.S3({
+var AWS = require('aws-sdk');
+var s3 = new AWS.S3();
+/*let s3 = new AWS.S3({
   accessKeyId: process.env.aws_access_key_id,
   secretAccessKey: process.env.aws_access_key
-});
+});*/
 
 // Bucket names must be unique across all S3 users
 
