@@ -61,38 +61,29 @@ var s3 = new AWS.S3({
 
 // Bucket names must be unique across all S3 users
 
-var myBucket = 'node-sdk-sample-test-04272017';
+var myBucket = 'node-sdk-sample-test-04282017';
 
-var myKey = 'hello_world.txt';
+var myKey = 'palms.jpeg';
 
+//http://stackoverflow.com/questions/28018855/upload-a-file-to-amazon-s3-with-nodejs
+//https://devcenter.heroku.com/articles/s3-upload-node
+//https://github.com/flyingsparx/NodeDirectUploader/blob/master/app.js
 
 s3.createBucket({Bucket: myBucket}, function(err, data) {
-
 if (err) {
-
    console.log(err);
-
    } else {
-
-     params = {Bucket: myBucket, Key: myKey, Body: 'Hello!'};
-
+     params = {Bucket: myBucket, Key: myKey, ACL: 'public-read', Body: 'Hello!'};
      s3.putObject(params, function(err, data) {
-
          if (err) {
-
              console.log(err)
-
          } else {
-
              console.log("Successfully uploaded data to myBucket/myKey");
              res.send(data);
          }
-
       });
-
-   }
-
-});
+     }
+  });
 });
 
 
