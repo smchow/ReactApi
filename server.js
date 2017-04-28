@@ -53,11 +53,11 @@ app.use("/educator", educatorRoutes);
 
 app.get('/notes/addImg', function(req,res){
 var AWS = require('aws-sdk');
-var s3 = new AWS.S3();
-/*let s3 = new AWS.S3({
-  accessKeyId: process.env.aws_access_key_id,
-  secretAccessKey: process.env.aws_access_key
-});*/
+//var s3 = new AWS.S3();
+var s3 = new AWS.S3({
+  aws_access_key_id : process.env.aws_access_key_id,
+  aws_secret_access_key: process.env.aws_access_key
+});
 
 // Bucket names must be unique across all S3 users
 
@@ -65,11 +65,6 @@ var myBucket = 'node-sdk-sample-test-04272017';
 
 var myKey = 'hello_world.txt';
 
-
-
-/*var myBucket = 'AKIAIJSVLR74BZAXOEMQ';
-
-var myKey = 'HmBRnMDqvJaSOV9HI6NMTpUw19gqSOfPfQTiev1K';*/
 
 s3.createBucket({Bucket: myBucket}, function(err, data) {
 
