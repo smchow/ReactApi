@@ -50,51 +50,51 @@ app.use("/notes", notesRoutes);
 app.use("/project", projectRoutes);
 app.use("/educator", educatorRoutes);
 
-app.get('/notes/addImg', function(req,res){
-  var AWS = require('aws-sdk');
+// app.get('/notes/addImg', function(req,res){
+//   var AWS = require('aws-sdk');
 
-var s3 = new AWS.S3();
+// var s3 = new AWS.S3();
 
-// Bucket names must be unique across all S3 users
+// // Bucket names must be unique across all S3 users
 
-var myBucket = 'node-sdk-sample-test-04272017';
+// var myBucket = 'node-sdk-sample-test-04272017';
 
-var myKey = 'hello_world.txt';
+// var myKey = 'hello_world.txt';
 
 
 
-/*var myBucket = 'AKIAIJSVLR74BZAXOEMQ';
+// /*var myBucket = 'AKIAIJSVLR74BZAXOEMQ';
 
-var myKey = 'HmBRnMDqvJaSOV9HI6NMTpUw19gqSOfPfQTiev1K';*/
+// var myKey = 'HmBRnMDqvJaSOV9HI6NMTpUw19gqSOfPfQTiev1K';*/
 
-s3.createBucket({Bucket: myBucket}, function(err, data) {
+// s3.createBucket({Bucket: myBucket}, function(err, data) {
 
-if (err) {
+// if (err) {
 
-   console.log(err);
+//    console.log(err);
 
-   } else {
+//    } else {
 
-     params = {Bucket: myBucket, Key: myKey, Body: 'Hello!'};
+//      params = {Bucket: myBucket, Key: myKey, Body: 'Hello!'};
 
-     s3.putObject(params, function(err, data) {
+//      s3.putObject(params, function(err, data) {
 
-         if (err) {
+//          if (err) {
 
-             console.log(err)
+//              console.log(err)
 
-         } else {
+//          } else {
 
-             console.log("Successfully uploaded data to myBucket/myKey");
-             res.send(data);
-         }
+//              console.log("Successfully uploaded data to myBucket/myKey");
+//              res.send(data);
+//          }
 
-      });
+//       });
 
-   }
+//    }
 
-});
-});
+// });
+// });
 
 
 
