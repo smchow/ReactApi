@@ -14,7 +14,7 @@ export default class App extends Component {
   
   componentDidMount(){
     console.log("test")
-    fetch("https://react-locus.herokuapp.com/view/1")
+    fetch("https://react-locus.herokuapp.com/viewnotes/1")
     .then(res => res.json())
     .then(projects => {
       console.log(projects[1]);
@@ -33,7 +33,7 @@ export default class App extends Component {
         </Text>
 
         
-        <Text style={styles.heading}>Enter Student ID</Text>
+        <Text style={styles.heading}>Enter Project ID</Text>
         <TextInput
           style={{ width: 200, height: 44, padding: 8 , border: 2 , borderStyle :'solid'}}
           defaultValue="studentId"
@@ -42,7 +42,7 @@ export default class App extends Component {
 
       <ListView
         dataSource={this.state.projects}
-        renderRow={(project) => <Text style={styles.item}>Project: {project.name} | Project: {project.name} | Instructions: {project.instructions}</Text>}
+        renderRow={(note) => <Text style={styles.item}>Student: {note.Student.username}  | Title: {note.title} | Description: {note.description}</Text>}
       />
       </View>
     );
