@@ -7,19 +7,20 @@ export default class App extends Component {
     super();
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      projects: ds.cloneWithRows([]),
-      studentId: "2"
+      notes: ds.cloneWithRows([]),
+      projectId: "1",
+      studentId: "1"
     };
   }
   
   componentDidMount(){
     console.log("test")
-    fetch("https://react-locus.herokuapp.com/viewnotes/1")
+    fetch("https://react-locus.herokuapp.com/viewnotes/3")
     .then(res => res.json())
-    .then(projects => {
-      console.log(projects[1]);
+    .then(notes => {
+      console.log(notes[1]);
       this.setState({
-        projects : this.state.projects.cloneWithRows(projects)
+      notes : this.state.notes.cloneWithRows(notes)
       })
     })
   }
@@ -41,7 +42,7 @@ export default class App extends Component {
         />
 
       <ListView
-        dataSource={this.state.projects}
+        dataSource={this.state.notes}
         renderRow={(note) => <Text style={styles.item}>Student: {note.Student.username}  | Title: {note.title} | Description: {note.description}</Text>}
       />
       </View>
