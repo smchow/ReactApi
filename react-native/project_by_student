@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, ListView , TextInput } from 'react-native';
 import { Constants } from 'expo';
@@ -11,7 +12,7 @@ export default class App extends Component {
       studentId: "2"
     };
   }
-  
+
   componentDidMount(){
     console.log("test")
     fetch("https://react-locus.herokuapp.com/view/1")
@@ -26,12 +27,13 @@ export default class App extends Component {
   
   render() {
     return (
+
       <View style={styles.container}>
+        
        <Text style={styles.h2}> Locus</Text>
         <Text style={styles.paragraph}>
           Projects list for student id: {this.state.studentId}
         </Text>
-
         
         <Text style={styles.heading}>Enter Student ID</Text>
         <TextInput
@@ -44,6 +46,7 @@ export default class App extends Component {
         dataSource={this.state.projects}
         renderRow={(project) => <Text style={styles.item}>Project: {project.name} | Project: {project.name} | Instructions: {project.instructions}</Text>}
       />
+
       </View>
     );
   }
@@ -55,7 +58,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: '#78bcaf',
   },
   h2: {
     fontSize: 18,
@@ -63,7 +66,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop:10,
     color: 'blue',
-    backgroundColor:'lightblue'
+    backgroundColor:'lightblue',
   },
   paragraph: {
     margin: 24,
@@ -73,7 +76,7 @@ const styles = StyleSheet.create({
     color: '#34495e',
   },
   item: {
-    marginTop: 10
+    marginTop: 10,
   }
   
 });
