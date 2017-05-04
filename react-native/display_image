@@ -1,0 +1,85 @@
+import React, { Component } from 'react';
+import { Text, View, StyleSheet, ListView , TextInput } from 'react-native';
+import { Constants } from 'expo';
+
+export default class App extends Component {
+    constructor() {
+    super();
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      projects: ds.cloneWithRows([]),
+      studentId: "2"
+    };
+  }
+  
+  componentDidMount(){
+    console.log("test")
+    fetch("https://react-locus.herokuapp.com/view/1")
+    .then(res => res.json())
+    .then(projects => {
+      console.log(projects[1]);
+      this.setState({
+        projects : this.state.projects.cloneWithRows(projects)
+      })
+    })
+  }
+  
+  render() {
+    return (
+      <View style={styles.container}>
+       <Text style={styles.h2}> Locus</Text>
+        <Text style={styles.paragraph}>
+          Projects list for student id: {this.state.studentId}
+        </Text>
+
+        
+        <Text style={styles.heading}>Enter Student ID</Text>
+        <TextInput
+          style={{ width: 200, height: 44, padding: 8 , border: 2 , borderStyle :'solid'}}
+          defaultValue="studentId"
+          onChangeText={(text) => this.setState({studentId: text})}
+        />
+
+      <ListView
+        dataSource={this.state.projects}
+        renderRow={(project) => <View> <Text style={styles.item}>Project: {project.name} | {project.image_url} | Instructions: {project.instructions}</Text> <Image source = {{
+      uri: 'http://facebook.github.io/react/img/logo_og.png'
+      }} style = {{width: 200, height: 200}} />
+      <Image source = {{
+      uri: '${project.image_url}'
+      }} style = {{width: 200, height: 200}} />
+   </View>}
+      />
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#ecf0f1',
+  },
+  h2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop:10,
+    color: 'blue',
+    backgroundColor:'lightblue'
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#34495e',
+  },
+  item: {
+    marginTop: 10
+  }
+  
+});
