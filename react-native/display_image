@@ -42,12 +42,14 @@ export default class App extends Component {
 
       <ListView
         dataSource={this.state.projects}
-        renderRow={(project) => <View> <Text style={styles.item}>Project: {project.name} | {project.image_url} | Instructions: {project.instructions}</Text> <Image source = {{
-      uri: 'http://facebook.github.io/react/img/logo_og.png'
-      }} style = {{width: 200, height: 200}} />
-      <Image source = {{
-      uri: '${project.image_url}'
-      }} style = {{width: 200, height: 200}} />
+        renderRow={(project) => <View> <Text style={styles.item}>Project: {project.name} | {project.image_url} |
+        Instructions: {project.instructions}</Text> 
+        <Image source = {{
+            uri: 'http://facebook.github.io/react/img/logo_og.png'
+         }} style = {{width: 200, height: 200}} />
+        <Image source = {{
+                uri: '${project.image_url}'
+        }} style = {{width: 200, height: 200}} />
    </View>}
       />
       </View>
