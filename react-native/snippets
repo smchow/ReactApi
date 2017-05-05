@@ -1,0 +1,44 @@
+import React, { Component } from 'react';
+import { AppRegistry, View, Text } from 'react-native';
+
+<View>
+            <Image
+            style={{width: 50, height: 50, justifyContent:'flex-start'}}
+             source={{uri: 'http://placehold.it/50x50'}}
+            />
+        </View>
+
+
+
+
+class FlexDimensionsBasics extends Component {
+  render() {
+    return (
+      // Try removing the `flex: 1` on the parent View.
+      // The parent will not have dimensions, so the children can't expand.
+      // What if you add `height: 300` instead of `flex: 1`?
+      <View style={{flex: 1}}>
+        <View style={{flex: 1, backgroundColor: 'powderblue'}}>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+          <View style={{flex: 1, backgroundColor: 'green'}}>
+            <Text>hello</Text>
+          </View>
+          <View style={{flex: 1, backgroundColor: 'blue'}}>
+            <Text>hello</Text>
+          </View>
+          <View style={{flex: 1, backgroundColor: 'red'}}>
+            <Text>hello</Text>
+          </View>
+        </View>
+        </View>
+        <View style={{flex: 4, backgroundColor: 'steelblue'}}>
+          <Text>
+            hello
+          </Text>
+        </View>
+      </View>
+    );
+  }
+}
+
+AppRegistry.registerComponent('AwesomeProject', () => FlexDimensionsBasics);

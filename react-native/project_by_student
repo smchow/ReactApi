@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ListView , TextInput , Image, ScrollView } from 'react-native';
+import { Text, View, ListView , TextInput , Image, StyleSheet } from 'react-native';
 import { Constants } from 'expo';
 
 export default class App extends Component {
@@ -28,8 +28,8 @@ export default class App extends Component {
     return (
 
       <View style={styles.container}>
-        <ScrollView>
-        <View style={{flex: 1, flexDirection: 'row', justifyContent:'flex-start'}}>
+  
+        <View style={{flex: 1, flexDirection: 'row'}}>
          <View style={styles.header}> 
            <Image
               style={{width: 50, length: 80, justifyContent:'flex-start'}}
@@ -39,56 +39,25 @@ export default class App extends Component {
          </View>
         </View>
 
-        <View style={{flex: 1, flexDirection: 'row'}}>
-          <Text style={styles.paragraph}>
-            Project List 
-          </Text>
-        </View>
-
-        <View style={{flex: 1, flexDirection: 'row', border: 2}}> 
-          <Text style={styles.input}>Enter Your Student ID</Text>
-        </View>
-
-        <View style={{flex: 1, flexDirection: 'row'}}> 
-          <TextInput
-            style={styles.input}
-            defaultValue="studentId"
-            onChangeText={(text) => this.setState({studentId: text})}
-          />
-        </View>
-
-        <View>
-            <Image
-            style={{width: 50, height: 50, justifyContent:'flex-start'}}
-             source={{uri: 'http://placehold.it/50x50'}}
-            />
-        </View>
         <ListView
           dataSource={this.state.projects}
           renderRow = {
                (rowData) => (
-              
                 <View style={styles.container}>
                   <Text style = {styles.listItem}>
+                    <Image style={{width: 50, height: 50, justifyContent:'flex-start'}}
+                     source={{uri: 'http://placehold.it/50x50'}}
+                    />
                    <Text style= {styles.listHeaderItem}> {rowData.name} {"\n"}{"\n"}</Text>
                    Description: {rowData.tagLine}
                   </Text>
-                    // <TouchableHighlight 
-                    //  style = {styles.viewDataBox}
-                    //  onPress={props.handleData} >
-                    //   <Text style = {styles.viewDataText}> 
-                    //   View Data
-                    //   </Text>
-                    // </TouchableHighlight>
                   <Image source = {{uri: rowData.image_url}} style = {{ height: 200}} /> 
                 </View>    
                )
             }
-        //   renderRow={(project) => 
-        //     <Text style={styles.item}>Project: {project.name} 
-        //     | Instructions: {project.instructions}</Text>}
+        //listview
         /> 
-       </ScrollView>
+
       </View> //container
     ); //return
   }
@@ -124,9 +93,6 @@ const styles = StyleSheet.create({
     alignSelf: 'strech',
     color: '#2c3e50',
   },
-  item: {
-    marginTop: 10,
-  },
   input:{
     width: 200, 
     height: 44, 
@@ -136,5 +102,19 @@ const styles = StyleSheet.create({
     alignSelf: 'strech',
     textAlign: 'center'
   },
+  listItem: {
+      paddingBottom: 32,
+      fontSize: 20,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      alignItems:'center',
+   },
+   listHeaderItem: {
+      paddingBottom: 52,
+      fontSize: 30,
+      fontWeight: 'bold',
+      textAlign: 'center',
+   },
+
 });
 
