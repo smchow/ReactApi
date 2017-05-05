@@ -1,3 +1,5 @@
+worked better at 3:07 pm
+
 import React, { Component } from 'react';
 import { Text, View, ListView , Image, StyleSheet } from 'react-native';
 import { Constants } from 'expo';
@@ -29,16 +31,10 @@ export default class App extends Component {
 
       <View style={styles.container}>
   
-        <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
          <View style={styles.header}> 
            <Image
-              style={{flex: 1,
-                width: 100,
-                height: 100,
-                resizeMode: 'contain',
-                borderColor: 'black', 
-                borderStyel: 'solid',
-                borderWidth: 1,}}
+              style={{width: 50, length: 80, justifyContent:'flex-start'}}
               source={{uri: 'https://locus-image-store.s3.amazonaws.com/locus.png'}}
             />
           <Text style={styles.h2}> Locus</Text>
@@ -50,23 +46,21 @@ export default class App extends Component {
           dataSource={this.state.projects}
           renderRow = {
               (rowData) => (
-              <View style={{flex: 1, flexDirection: 'row', paddingTop: 20}}>
+              <View style={{flex: .5, flexDirection: 'row'}}>
                   <Image style={{width: 100, height: 100, justifyContent:'flex-start'}}
                    source={{uri: 'https://s3.amazonaws.com/locus-image-store/astronomy.jpg'}}
                   />
             
-                
+           
                   <Text style= {styles.listHeaderItem}> {rowData.name} {"\n"}{"\n"}</Text>
-             
                   <Text style = {styles.listItem}> Description: {rowData.tagLine}</Text>
-               
               </View>
               )
           }
         //listview
         /> 
 
-        <View style={styles.footer} />
+        <View style={styles.header} />
 
       </View> //container
     ); //return
@@ -76,44 +70,33 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
   },
   h2: {
     fontSize: 25,
     fontWeight: 'bold',
-    //justifyContent: 'space-between',
-    //marginTop:35,
-    //marginRight:55,
+    justifyContent: 'flex-end',
+    marginTop:10,
     color: '#2c3e50',
   },
   header:{
-    //alignSelf: 'strech',
+    alignSelf: 'strech',
     flexDirection: 'row',
     backgroundColor: '#78bcaf',
-    //textAlign: 'center',
+    textAlign: 'center',
     flex:1,
-    justifyContent: 'space-around',
-    
-    //padding: 10,
+    padding: 20,
   },
   listItem: {
       fontSize: 12,
       fontWeight: 'bold',
-      flex: 1,
-      flexDirection: 1,
    },
    listHeaderItem: {
       fontSize: 12,
       fontWeight: 'bold',
    },
-   footer: {
-      position: 'absolute',
-      flexDirection: 'row',
-      backgroundColor: '#78bcaf',
-      flexDirection: 'column',
-      justifyContent: 'space-between'
-   }
 
 });
 
