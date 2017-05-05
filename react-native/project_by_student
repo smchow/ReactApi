@@ -1,6 +1,5 @@
-
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ListView , TextInput } from 'react-native';
+import { Text, View, StyleSheet, ListView , TextInput , Image } from 'react-native';
 import { Constants } from 'expo';
 
 export default class App extends Component {
@@ -29,23 +28,48 @@ export default class App extends Component {
     return (
 
       <View style={styles.container}>
-        
-       <Text style={styles.h2}> Locus</Text>
-        <Text style={styles.paragraph}>
-          Projects list for student id: {this.state.studentId}
-        </Text>
-        
-        <Text style={styles.heading}>Enter Student ID</Text>
-        <TextInput
-          style={{ width: 200, height: 44, padding: 8 , border: 2 , borderStyle :'solid'}}
-          defaultValue="studentId"
-          onChangeText={(text) => this.setState({studentId: text})}
-        />
 
-      <ListView
-        dataSource={this.state.projects}
-        renderRow={(project) => <Text style={styles.item}>Project: {project.name} | Project: {project.name} | Instructions: {project.instructions}</Text>}
-      />
+        <View style={{flex: 1, flexDirection: 'row'}}>
+         <View style={styles.header}> 
+           <Image
+              style={{styles.logo}}
+              source={{uri: 'https://locus-image-store.s3.amazonaws.com/locus.png'}}
+            />
+          <Text style={styles.h2}> Locus</Text>
+         </View>
+        </View>
+
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <Text style={styles.paragraph}>
+            Project List 
+          </Text>
+        </View>
+
+        <View style={{flex: 1, flexDirection: 'row', border: 2}}> 
+          <Text style={styles.input}>Enter Your Student ID</Text>
+        </View>
+
+        <View style={{flex: 1, flexDirection: 'row'}}> 
+          <TextInput
+            style={styles.input}
+            defaultValue="studentId"
+            onChangeText={(text) => this.setState({studentId: text})}
+          />
+        </View>
+
+        <View>
+            <Image
+            style={{width: 50, height: 50}}
+             source={{uri: 'http://placehold.it/50x50'}}
+            />
+        </View>
+        <ListView
+          dataSource={this.state.projects}
+          renderRow={(project) => 
+          
+            <Text style={styles.item}>Project: {project.name} 
+            | Instructions: {project.instructions}</Text>}
+        />
 
       </View>
     );
@@ -58,25 +82,46 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#78bcaf',
   },
   h2: {
-    fontSize: 18,
+    fontSize: 25,
     fontWeight: 'bold',
-    textAlign: 'center',
+    justifyContent: 'center',
     marginTop:10,
-    color: 'blue',
-    backgroundColor:'lightblue',
+    color: '#2c3e50',
+  },
+  logo: {
+    justifyContent:'flex-start',
+    width: 50,
+    height: 80,
+  },
+  header:{
+    alignSelf: 'strech',
+    flexDirection: 'row',
+    backgroundColor: '#78bcaf',
+    textAlign: 'center',
+    flex:1,
+    padding: 20,
   },
   paragraph: {
-    margin: 24,
+    // margin: 24,
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#34495e',
+    alignSelf: 'strech',
+    color: '#2c3e50',
   },
   item: {
     marginTop: 10,
-  }
-  
+  },
+  input:{
+    width: 200, 
+    height: 44, 
+    padding: 8 , 
+    border: 2 , 
+    borderStyle :'solid',
+    alignSelf: 'strech',
+    textAlign: 'center'
+  },
 });
+
