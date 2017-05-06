@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ListView , TextInput } from 'react-native';
+import { Text, View, ListView , Image, StyleSheet } from 'react-native';
 import { Constants } from 'expo';
 
 export default class App extends Component {
@@ -11,7 +11,7 @@ export default class App extends Component {
       studentId: "2"
     };
   }
-  
+
   componentDidMount(){
     console.log("test")
     fetch("https://react-locus.herokuapp.com/view/1")
@@ -26,54 +26,97 @@ export default class App extends Component {
   
   render() {
     return (
+
       <View style={styles.container}>
-       <Text style={styles.h2}> Locus</Text>
-        <Text style={styles.paragraph}>
-          Projects list for student id: {this.state.studentId}
-        </Text>
+  
+        <View style={{flex: 1, flexDirection: 'row'}}>
+         <View style={styles.header}> 
+           <Image
+              style={{
+                width: 100,
+                height: 100,
+                resizeMode: 'contain',
+                borderColor: 'black', 
+                borderStyel: 'solid',
+                borderWidth: 1,}}
+              source={{uri: 'https://locus-image-store.s3.amazonaws.com/locus.png'}}
+            />
+          <Text style={styles.h2}> Locus</Text>
+         </View>
+        </View>
 
-        
-        <Text style={styles.heading}>Enter Student ID</Text>
-        <TextInput
-          style={{ width: 200, height: 44, padding: 8 , border: 2 , borderStyle :'solid'}}
-          defaultValue="studentId"
-          onChangeText={(text) => this.setState({studentId: text})}
-        />
+       
+        <ListView
+          dataSource={this.state.projects}
+          renderRow = {
+              (rowData) => (
+              <View style={{flex: 1, 
+              flexDirection: 'row', 
+              paddingTop: 5,
+              borderColor: 'black', 
+              borderStyel: 'solid',
+              borderWidth: 1,
+              }}>
+                  <Image style={{width: 100, height: 100, justifyContent:'flex-start'}}
+                   source={{uri: 'https://s3.amazonaws.com/locus-image-store/astronomy.jpg'}}
+                  />
+            
+         
+                  <Text style= {styles.listHeaderItem}> {rowData.name} {"\n"}{"\n"}
+                  <Text style = {styles.listItem}> Description: {rowData.tagLine}</Text>
+                  </Text>
+            
+              </View>
+              )
+          }
+        //listview
+        /> 
 
-      <ListView
-        dataSource={this.state.projects}
-        renderRow={(project) => <Text style={styles.item}>Project: {project.name} | Project: {project.name} | Instructions: {project.instructions}</Text>}
-      />
-      </View>
-    );
+   <View style={{flexDirection: 'row', backgroundColor: '#78bcaf', height: 70}}>
+   </View>
+
+      </View> //container
+    ); //return
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
   },
   h2: {
-    fontSize: 18,
+    fontSize: 25,
     fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop:10,
-    color: 'blue',
-    backgroundColor:'lightblue'
+    justifyContent: 'space-between',
+    marginTop:35,
+    marginRight:55,
+    marginLeft: 20,
+    color: '#2c3e50',
   },
-  paragraph: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#34495e',
+  header:{
+    alignSelf: 'strech',
+    flexDirection: 'row',
+    backgroundColor: '#78bcaf',
+    //textAlign: 'center',
+    flex:1,
+    //justifyContent: 'space-around',
+    
+    //padding: 10,
   },
-  item: {
-    marginTop: 10
-  }
-  
+  listItem: {
+      fontSize: 12,
+      fontWeight: 'bold',
+      flex: 1,
+      flexDirection: "row",
+      borderColor: 'black', 
+      borderStyel: 'solid',
+      borderWidth: 1,
+   },
+   listHeaderItem: {
+      fontSize: 14,
+      fontWeight: 'bold',
+
+   },
 });

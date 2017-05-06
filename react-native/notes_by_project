@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ListView , TextInput } from 'react-native';
+import { Text, View, StyleSheet, ListView , TextInput, Image } from 'react-native';
 import { Constants } from 'expo';
 
 export default class App extends Component {
@@ -27,24 +27,36 @@ export default class App extends Component {
   
   render() {
     return (
+
       <View style={styles.container}>
-       <Text style={styles.h2}> Locus</Text>
-        <Text style={styles.paragraph}>
-          Projects list for student id: {this.state.studentId}
-        </Text>
-
+  
+        <View style={{flex: 1, flexDirection: 'row'}}>
+         <View style={styles.header}> 
+           <Image
+              style={{
+                width: 100,
+                height: 100,
+                resizeMode: 'contain',
+                }}
+              source={{uri: 'https://locus-image-store.s3.amazonaws.com/locus.png'}}
+            />
+          <Text style={styles.h2}> Locus</Text>
+         </View>
+        </View>
         
-        <Text style={styles.heading}>Enter Project ID</Text>
-        <TextInput
-          style={{ width: 200, height: 44, padding: 8 , border: 2 , borderStyle :'solid'}}
-          defaultValue="studentId"
-          onChangeText={(text) => this.setState({studentId: text})}
-        />
+        
+          <Text style={styles.paragraph}>
+            Student Feild Notes {this.state.studentId}
+          </Text>
+          <ListView
+            dataSource={this.state.notes}
+            renderRow={(note) => <Text style={styles.item}>Student: {note.Student.username}  | Title: {note.title} | Description: {note.description}</Text>}
+            />
+         
+        
+        <View style={{flexDirection: 'row', backgroundColor: '#78bcaf', height: 70}}>
+        </View>
 
-      <ListView
-        dataSource={this.state.notes}
-        renderRow={(note) => <Text style={styles.item}>Student: {note.Student.username}  | Title: {note.title} | Description: {note.description}</Text>}
-      />
       </View>
     );
   }
@@ -53,18 +65,17 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
   },
   h2: {
-    fontSize: 18,
+    fontSize: 25,
     fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop:10,
-    color: 'blue',
-    backgroundColor:'lightblue'
+    justifyContent: 'space-between',
+    marginTop:35,
+    marginRight:55,
+    marginLeft: 20,
+    color: '#2c3e50',
   },
   paragraph: {
     margin: 24,
@@ -72,9 +83,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#34495e',
+    justifyContent: 'space-between',
+    flex: 1,
+  },
+  header:{
+    alignSelf: 'strech',
+    flexDirection: 'row',
+    backgroundColor: '#78bcaf',
+    flex:1,
   },
   item: {
-    marginTop: 10
+    marginTop: 2,
+    textAlign: 'center',
+    
   }
   
 });
